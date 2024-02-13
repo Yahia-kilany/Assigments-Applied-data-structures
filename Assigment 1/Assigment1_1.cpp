@@ -1,54 +1,70 @@
 #include <iostream>
-#include <map>
-#include "stackt.h"
+#include "stackt.h" // Assuming stackt.h contains the Stackt class definition
 
-void Towers (int N , Stackt<int>* DisplayPegs[] , Stackt<int>& Source , Stackt<int>& Target , Stackt<int>& Aux , char CharSource , char CharTarget , char CharAux , int& moveCount) {
+// Function to move disks from source to target using auxiliary pegs
+void Towers(int N, Stackt<int>* DisplayPegs[], Stackt<int>& Source, Stackt<int>& Target, Stackt<int>& Aux, char CharSource, char CharTarget, char CharAux, int& moveCount) {
     if (N == 1) {
-        Target.push (Source.top ());
-        Source.pop ();
+        // Base case: move the top disk from Source to Target
+        Target.push(Source.top());
+        Source.pop();
         moveCount++;
-        std::cout << "Move " << moveCount << ": " << "Disk " << Target.top () << " from " << CharSource << " to " << CharTarget << std::endl;
+        
+        // Print the move and display the state of each peg
+        std::cout << "Move " << moveCount << ": " << "Disk " << Target.top() << " from " << CharSource << " to " << CharTarget << std::endl;
         std::cout << "Peg A:" << std::endl;
-        DisplayPegs[0]->display ();
+        DisplayPegs[0]->display();
         std::cout << "Peg B:" << std::endl;
-        DisplayPegs[1]->display ();
+        DisplayPegs[1]->display();
         std::cout << "Peg C:" << std::endl;
-        DisplayPegs[2]->display ();
+        DisplayPegs[2]->display();
         std::cout << std::endl;
-    }
-    else {
-        Towers (N - 1 , DisplayPegs , Source , Aux , Target , CharSource , CharAux , CharTarget , moveCount);
-        Target.push (Source.top ());
-        Source.pop ();
+    } else {
+        // Recursive case: move N-1 disks from Source to Aux using Target as auxiliary
+        Towers(N - 1, DisplayPegs, Source, Aux, Target, CharSource, CharAux, CharTarget, moveCount);
+        
+        // Move the remaining disk from Source to Target
+        Target.push(Source.top());
+        Source.pop();
         moveCount++;
-        std::cout << "Move " << moveCount << ": " << "Disk " << Target.top () << " from " << CharSource << " to " << CharTarget << std::endl;
+        
+        // Print the move and display the state of each peg
+        std::cout << "Move " << moveCount << ": " << "Disk " << Target.top() << " from " << CharSource << " to " << CharTarget << std::endl;
         std::cout << "Peg A:" << std::endl;
-        DisplayPegs[0]->display ();
+        DisplayPegs[0]->display();
         std::cout << "Peg B:" << std::endl;
-        DisplayPegs[1]->display ();
+        DisplayPegs[1]->display();
         std::cout << "Peg C:" << std::endl;
-        DisplayPegs[2]->display ();
+        DisplayPegs[2]->display();
         std::cout << std::endl;
-        Towers (N - 1 , DisplayPegs , Aux , Target , Source , CharAux , CharTarget , CharSource , moveCount);
+        
+        // Move the N-1 disks from Aux to Target using Source as auxiliary
+        Towers(N - 1, DisplayPegs, Aux, Target, Source, CharAux, CharTarget, CharSource, moveCount);
     }
 }
 
-
-int main () {
+int main() {
     int N;
     std::cout << "Enter the number of disks: ";
     std::cin >> N;
-    Stackt<int> pegA , pegB , pegC;
+    
+    // Create three pegs
+    Stackt<int> pegA, pegB, pegC;
     int moveCount = 0;
+    
     // Initialize pegA with disks
     for (int i = N; i >= 1; --i) {
-        pegA.push (i);
+        pegA.push(i);
     }
-    Stackt<int>* pegs[] = { &pegA,&pegB,&pegC };
-    char CharPegs[] = { 'A','B','C' };
+    
+    // Array of pointers to the three pegs
+    Stackt<int>* pegs[] = { &pegA, &pegB, &pegC };
+    // Characters representing the pegs
+    char CharPegs[] = { 'A', 'B', 'C' };
 
-    Towers (N , pegs , pegA , pegC , pegB , CharPegs[0] , CharPegs[2] , CharPegs[1] , moveCount);
+    // Call Towers function to solve the problem
+    Towers(N, pegs, pegA, pegC, pegB, CharPegs[0], CharPegs[2], CharPegs[1], moveCount);
 
+    // Print the total number of moves needed
     std::cout << "Number of moves needed: " << moveCount << std::endl;
 
     return 0;
