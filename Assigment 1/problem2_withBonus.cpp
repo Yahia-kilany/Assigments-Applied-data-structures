@@ -4,6 +4,28 @@
 
 using namespace std;
 
+// Function declarations
+string spaceInfix (string infix);
+bool isOperator (char c);
+int getPrecedence (char op);
+string infixToPostfix (string infix);
+double calculate (double a , double b , char oper);
+double evaluatePostfix (string expression);
+
+int main () {
+    string infixExpression;
+    cout << "Enter an infix expression: ";
+    getline (cin , infixExpression);
+    string spacedInfix = spaceInfix (infixExpression);
+    cout << "Space infix " << spacedInfix << endl;
+    string postfixExpression = infixToPostfix (spacedInfix);
+    cout << "Postfix expression: " << postfixExpression << endl;
+    double result = evaluatePostfix (postfixExpression);
+    cout << "Result: " << result << endl;
+
+    return 0;
+}
+
 // Function to check if a character is an operator
 bool isOperator (char c) {
     return c == '+' || c == '-' || c == '*' || c == '/';
@@ -22,7 +44,21 @@ int getPrecedence (char op) {
         return 0;
     }
 }
+string spaceInfix (string infix) {
+    string newInfix = "";
+    for (char& c : infix) {
 
+        if (isOperator (c) || c == '(' || c == ')') {
+            newInfix += ' ';
+            newInfix += c;
+            newInfix += ' ';
+        }
+        else {
+            newInfix += c;
+        }
+    }
+    return newInfix;
+}
 // Function to convert infix expression to postfix
 string infixToPostfix (string infix) {
     Stackt<char> operatorStack;
@@ -59,6 +95,7 @@ string infixToPostfix (string infix) {
 
     return postfix;
 }
+
 // Function to evaluate a postfix expression
 double calculate (double a , double b , char oper) {
     switch (oper) {
@@ -108,27 +145,4 @@ double evaluatePostfix (string expression) {
     double result = stack.top ();
     stack.pop ();
     return result;
-}
-int main () {
-    string infixExpression;
-    cout << "Enter an infix expression: ";
-    getline (cin , infixExpression);
-    string spacedInfix;
-    for (char& c : infixExpression) {
-        if (isOperator (c) || c == '(' || c == ')') {
-            spacedInfix += ' ';
-            spacedInfix += c;
-            spacedInfix += ' ';
-        }
-        else {
-            spacedInfix += c;
-        }
-    }
-    cout << "space infix " << spacedInfix << endl;
-    string postfixExpression = infixToPostfix (spacedInfix);
-    std::cout << "Postfix expression: " << postfixExpression << endl;
-    double result = evaluatePostfix (postfixExpression);
-    cout << "Result: " << result << endl;
-
-    return 0;
 }
