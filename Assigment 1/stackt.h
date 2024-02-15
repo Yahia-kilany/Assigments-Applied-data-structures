@@ -24,7 +24,7 @@ public:
 
     void push(const T& value) {
         if (isFull()) {
-            cout<< "Error:STACK OVERFLOW";
+            throw runtime_error("Error:STACK OVERFLOW");
             exit(1);
         }
         topIndex++;
@@ -33,7 +33,7 @@ public:
 
     void pop() {
         if (isEmpty()) {
-            cout<< "Error:STACK UNDERFLOW";
+            throw runtime_error("Error:STACK UNDERFLOW");
             exit(1);
         }
         topIndex--;

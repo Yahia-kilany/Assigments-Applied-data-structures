@@ -91,7 +91,7 @@ double evaluatePostfix (string postfix) {
                 break;
                 // Add more cases for other operators if needed
             default:
-                cout << "Invalid operator encountered." << endl;
+                throw runtime_error("Invalid operator encountered");
                 exit (1);
             }
         }
