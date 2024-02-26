@@ -111,7 +111,7 @@ public:
         while (currptr->next != nullptr) {
             currptr = currptr->next;
         }
-        reuturn currptr->value;
+        return currptr->value;
     }
     int Length () {
         int length = 0;
@@ -126,4 +126,4 @@ public:
     }
 
 };
-#endif #DEQ_H
+#endif //DEQ_H
