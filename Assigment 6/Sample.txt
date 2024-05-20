@@ -1,0 +1,59 @@
+File: Sample.txt
+Results for sample graph in file "TestG.txt"
+
+Number of Vertices = 7
+Number of Edges = 10
+
+Adjacency Matrix
+  0  15  30   0  20   0   0
+ 15   0   0  40   0   0   0
+ 30   0   0  35  10   0   0
+  0  40  35   0   0  11   0
+ 20   0  10   0   0  50  75
+  0   0   0  11  50   0  16
+  0   0   0   0  75  16   0
+
+Graph Edges
+A B 15
+A C 30
+A E 20
+B D 40
+C D 35
+C E 10
+D F 11
+E F 50
+E G 75
+F G 16
+
+DFS Traversal
+val =     1     2     4     3     5     6     7
+
+
+All-Pairs Shortest Paths
+     0    15    30    55    20    66    82
+    15     0    45    40    35    51    67
+    30    45     0    35    10    46    62
+    55    40    35     0    45    11    27
+    20    35    10    45     0    50    66
+    66    51    46    11    50     0    16
+    82    67    62    27    66    16     0
+
+Via Array
+     0     0     0     2     0     4     6
+     0     0     1     0     1     4     6
+     0     1     0     0     0     4     6
+     2     0     0     0     3     0     6
+     0     1     0     3     0     0     6
+     4     4     4     0     0     0     0
+     6     6     6     6     6     0     0
+
+Shortest Paths from Node A
+   0 A
+  15 AB
+  30 AC
+  55 ABD
+  20 AE
+  66 ABDF
+  82 ABDFG
+
+
